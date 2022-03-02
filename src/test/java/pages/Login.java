@@ -10,7 +10,7 @@ import utils.Validation;
 
 public class Login extends PageFactory{
     Validation valida;
-    WebDriverWait wait;
+
 
     @FindBy(id = "username")
     private WebElement USERNAME;
@@ -23,22 +23,19 @@ public class Login extends PageFactory{
 
 
     public Login(WebDriver driver, SoftAssert softAssert, WebDriverWait wait) {
-        super(driver);
+        super(driver, wait);
         this.valida = new Validation(softAssert);
-        this.wait = wait;
     }
 
     public void preencherUsername(String username){
-
-        wait.until(ExpectedConditions.elementToBeClickable(USERNAME)).sendKeys(username);
-
+        preencherCampo(USERNAME,username);
     }
 
     public void preencherPassword(String password) {
-        PASSWORD.sendKeys(password);
+        preencherCampo(PASSWORD,password);
     }
 
     public void clicarSingIn(){
-        SINGIN.click();
+        clicar(SINGIN);
     }
 }
