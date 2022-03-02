@@ -3,11 +3,14 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import utils.Validation;
 
 public class Login extends PageFactory{
     Validation valida;
+    WebDriverWait wait;
 
     @FindBy(id = "username")
     private WebElement USERNAME;
@@ -19,13 +22,16 @@ public class Login extends PageFactory{
     private WebElement SINGIN;
 
 
-    public Login(WebDriver driver, SoftAssert softAssert) {
+    public Login(WebDriver driver, SoftAssert softAssert, WebDriverWait wait) {
         super(driver);
         this.valida = new Validation(softAssert);
+        this.wait = wait;
     }
 
     public void preencherUsername(String username){
-        USERNAME.sendKeys(username);
+
+        wait.until(ExpectedConditions.elementToBeClickable(USERNAME)).sendKeys(username);
+
     }
 
     public void preencherPassword(String password) {
